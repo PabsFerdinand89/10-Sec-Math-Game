@@ -34,7 +34,7 @@ $(document).ready(function(){
   var getRandomNumberA = Math.floor(Math.random() * 10) + 1;
   var getRandomNumberB = Math.floor(Math.random() * 10) + 1;
 
-  var opArray = ['+', '-', '*', '/', '%', '**'];
+  var opArray = ['+', '-', '*', '/'];
   var getRandomItem = function (arr) {
     var randomIndex = Math.floor(Math.random() * arr.length);
     var item = arr[randomIndex];
@@ -42,31 +42,34 @@ $(document).ready(function(){
     };
   var randomOp = getRandomItem(opArray);
 
-  var getRandomQuestion = getRandomNumberA + ' ' + randomOp + ' ' + getRandomNumberB + ' = ';
+  var getRandomQuestion = function () {
+    question = {};
+    question = getRandomNumberA + randomOp + getRandomNumberB;
+    return question;
+    };
   $('#equation').text(getRandomQuestion);
   var answer = eval(getRandomNumberA + randomOp + getRandomNumberB);
   
   var getNewQuestion = function () {
     currentQuestion = getRandomQuestion();
-  
   }
 
-  var checkAnswer = function (userInput, answer) {
-    if (userInput === answer) {
-      getRandomQuestion();
-      $('#user-input').val('');
+
+  var checkAnswer = function (userAnswerInput, answer) {
+    if (userAnswerInput === answer) {
+      getNewQuestion();
+      $('#userAnswerInput').val('');
       updateTimeLeft(+1);
       updateScore(+1);
     }
   };
   
-  $('#user-input').on('keyup', function () {
+  $('#userAnswerInput').on('keyup', function () {
     startGame();
-    checkAnswer(Number($(this).val()), question.getRandomQuestion);
+    checkAnswer(($(this).val()), currentQuestion.answer);
   });
   
-  
-  getRandomQuestion();
+  getNewQuestion();
 });
 
 
