@@ -3,21 +3,28 @@ $(document).ready(function(){
   var interval;
   var timeLeft = 10;
   var score = 0;
+  var highScore = 0;
   
   var updateTimeLeft = function (amount) {
     timeLeft += amount;
-    $('#timeLeft').text(timeLeft);
+    $('#time-left').text(timeLeft);
   };
   
   var updateScore = function (amount) {
     score += amount;
-    $('#userScore').text(score);
+    $('#score').text(score);
   };
-  
+
   var startGame = function () {
     if (!interval) {
       if (timeLeft === 0) {
         updateTimeLeft(10);
+        if (score > highScore) {
+          highScore = score;
+          $('#highScore').text(highScore);
+          alert("New High Score!");
+          localStorage.setItem(highScore, '#highScore.text');
+        };
         updateScore(-score);
       }
       interval = setInterval(function () {
@@ -29,47 +36,48 @@ $(document).ready(function(){
       }, 1000);  
     }
   };
-
   
-  var getRandomNumberA = Math.floor(Math.random() * 10) + 1;
-  var getRandomNumberB = Math.floor(Math.random() * 10) + 1;
 
-  var opArray = ['+', '-', '*', '/'];
-  var getRandomItem = function (arr) {
-    var randomIndex = Math.floor(Math.random() * arr.length);
-    var item = arr[randomIndex];
-      return item;
-    };
-  var randomOp = getRandomItem(opArray);
-
-  var getRandomQuestion = function () {
-    question = {};
-    question = getRandomNumberA + randomOp + getRandomNumberB;
+  var questionGenerator = function () {
+    var question = {};
+    var getRandomNumberA = Math.floor(Math.random() * 10) + 1;
+    var getRandomNumberB = Math.floor(Math.random() * 10) + 1;
+    //get random operator
+    var opArray = ['+', '-', '*', '/'];
+    var getRandomItem = function (arr) {
+      var randomIndex = Math.floor(Math.random() * arr.length);
+      var item = arr[randomIndex];
+        return item;
+      };
+    var randomOp = getRandomItem(opArray);
+    
+    question.answer = eval(getRandomNumberA + randomOp + getRandomNumberB);
+    question.equation = String(getRandomNumberA) + String(randomOp) + String(getRandomNumberB);
+    
     return question;
-    };
-  $('#equation').text(getRandomQuestion);
-  var answer = eval(getRandomNumberA + randomOp + getRandomNumberB);
+  };
   
-  var getNewQuestion = function () {
-    currentQuestion = getRandomQuestion();
-  }
+  
+  var renderNewQuestion = function () {
+    currentQuestion = questionGenerator();
+    $('#equation').text(currentQuestion.equation);  
+  };
 
-
-  var checkAnswer = function (userAnswerInput, answer) {
-    if (userAnswerInput === answer) {
-      getNewQuestion();
-      $('#userAnswerInput').val('');
+  var checkAnswer = function (userInput, answer) {
+    if (userInput === answer) {
+      renderNewQuestion();
+      $('#user-input').val('');
       updateTimeLeft(+1);
       updateScore(+1);
     }
   };
-  
-  $('#userAnswerInput').on('keyup', function () {
-    startGame();
-    checkAnswer(($(this).val()), currentQuestion.answer);
-  });
-  
-  getNewQuestion();
-});
 
+  
+  $('#user-input').on('keyup', function () {
+    startGame();
+    checkAnswer(Number($(this).val()), currentQuestion.answer);
+  });
+
+  renderNewQuestion();
+});
 

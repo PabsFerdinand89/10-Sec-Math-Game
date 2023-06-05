@@ -1,19 +1,37 @@
-html, body {
+html {
   height: 100%;
   width: 100%;
-  background-color: lightslategray;
+}
+
+body {
+  background-image: linear-gradient(slategrey, white, white);
+}
+
+h1 {
+  color: rgb(9, 69, 118);
+}
+
+#equation {
+  margin-top: 25px;
+  border-style: ridge;
+  border-color: rgb(182, 181, 191);
+  border-radius: 14px;
+}
+
+.container, input {
   margin-top: 25px;
   margin-bottom: 25px;
 }
 
-small {
-  background-color: white;
+button:hover {
+  color: lightgrey;
+  transition: 2s;
 }
 
-.container {
-  width: 100%;
-  height: 100%;
-  border-style: solid;
-  border-color: black;
-  border-width: 25px;
+ul {
+  width: 50%;
+}
+
+img {
+  width: 90%;
 }
