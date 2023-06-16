@@ -42,6 +42,7 @@ $(document).ready(function(){
     var question = {};
     var getRandomNumberA = Math.floor(Math.random() * 10) + 1;
     var getRandomNumberB = Math.floor(Math.random() * 10) + 1;
+    
     //get random operator
     var opArray = ['+', '-', '*', '/'];
     var getRandomItem = function (arr) {
@@ -53,10 +54,21 @@ $(document).ready(function(){
     
     question.answer = eval(getRandomNumberA + randomOp + getRandomNumberB);
     question.equation = String(getRandomNumberA) + String(randomOp) + String(getRandomNumberB);
+
+    if (randomOp === '-') {
+      question.answer = eval((getRandomNumberA + getRandomNumberB) - getRandomNumberB);
+      question.equation = String(getRandomNumberA + getRandomNumberB) + '-' + String(getRandomNumberB)
+    }
     
+    if (randomOp === '/') {
+      question.answer = eval((getRandomNumberA * getRandomNumberB) / getRandomNumberB);
+      question.equation = String(getRandomNumberA * getRandomNumberB) + '/' + String(getRandomNumberB);
+    }
+ 
     return question;
   };
   
+
   
   var renderNewQuestion = function () {
     currentQuestion = questionGenerator();
@@ -79,5 +91,6 @@ $(document).ready(function(){
   });
 
   renderNewQuestion();
+
 });
 

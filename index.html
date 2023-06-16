@@ -15,21 +15,21 @@
   </head>
   
   <body>
-    <div class="container-fluid text-center">
+    <div class="container text-center">
       <div class="row">
         <div class="col-xs-12">
-          <h1 class="m-5 text-primary-emphasis"><label>10 Second Math Game</label></h1>
+          <h1 class="m-1 text-primary-emphasis"><label>10 Second Math Game</label></h1>
         </div>
         <div class="col-sm-12">
-          <h4 id="time-left">10 </h4>   
+          <h5 id="time-left">10 </h5>   
           <span>seconds left</span>
         <div class="col-12">
           <h2 id="equation"></h2>
-          <input id="user-input" type="number"/>  
+          <input id="user-input" type="number" step="1" placeholder="Type your answer here"/>  
         </div>
       </div>
     </div>
-    <div id="scoreArea" class="container-fluid">
+    <div id="scoreArea" class="container">
       <div class="row">
         <div class="col-4 text-center">
           <h4>Score: <span id="score"></span></h4>
@@ -44,22 +44,30 @@
           </ul>
         </div>
       </div>
-    </div>
-  </body>
+    </body>
 
-  <footer>
-    <div class="container-fluid mt-5">
-      <div class="row">
-        <div class="col-sm-1"></div>
-        <div class="col-sm-2"><img src="/addition.png" class="img-fluid"alt="additionOperator"/></div>
-        <div class="col-sm-2"><img src="/division.png" class="img-fuid"alt="divisionOperator"/></div>
-        <div class="col-sm-2"><img src="/equal sign.png" class="img-fluid" alt="equalSign"></div>
-        <div class="col-sm-2"><img src="/multiplication.png" class="img-fluid" alt="multiplicationOperator"/></div>
-        <div class="col-sm-2"><img src="/subtraction.png" class="img-fluid" alt="subtractionOperator"></div>
-        <div class="col-sm-1"></div>
+    <footer class="container-fluid">
+      <div id="carouselAutoplaying" class="carousel slide justify-content-center" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="/addition.png" class="justify-content-center-d-block w-10 h-10" alt="addition operator">
+          </div>
+          <div class="carousel-item">
+            <img src="/division.png" class="justify-content-center-d-block w-10 h-10" alt="division operator">
+          </div>
+          <div class="carousel-item">
+            <img src="/equal sign.png" class="justify-content-center-d-block w-10 h-10" alt="equal sign">
+          </div>
+          <div class="carousel-item">
+            <img src="/multiplication.png" class="justify-content-center-d-block w-10 h-10" alt="equal sign">
+          </div>
+          <div class="carousel-item">
+            <img src="/subtraction.png" class="justify-content-center-d-block w-10 h-10" alt="equal sign">
+          </div>
+        </div>
       </div>
-    </div>
-  </footer>
+      <span><small>Created by Pablo H.</small></span>
+    </footer>  
 
 </html>
 
